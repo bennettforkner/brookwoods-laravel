@@ -14,8 +14,8 @@ class ActivityController extends Controller
         return view('pages.activities.index', ['activities' => $activitites]);
     }
 
-    function show($id) {
-        $activity = Activity::find($id);
+    function show($activity_id) {
+        $activity = Activity::find($activity_id);
 
         return view('pages.activities.show', ['activity' => $activity]);
     }
