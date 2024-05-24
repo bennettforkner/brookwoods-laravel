@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Activity;
+use App\Models\Person;
+use App\Models\Scoresheet;
 
 class ActivityController extends Controller
 {
@@ -17,6 +19,10 @@ class ActivityController extends Controller
     function show($activity_id) {
         $activity = Activity::find($activity_id);
 
-        return view('pages.activities.show', ['activity' => $activity]);
+        $scoresheets = Scoresheet::where('activity_id', $activity_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pages.activities.show', ['activity' => $activity, 'scoresheets' => $scoresheets]);
     }
 }

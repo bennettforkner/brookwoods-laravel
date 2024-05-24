@@ -35,13 +35,20 @@
                     <x-card :class="'bg-white rounded-lg shadow-lg p-6'">
                         <h2 class="text-xl font-semibold text-gray-900">Award Earners</h2>
                         <ul class="list-group">
-                            @foreach($activity->achievers_this_year as $achiever)
+                            @foreach($scoresheets as $scoresheet)
                                 <li class="list-group-item">
                                     <a href="#">
-                                        <div class="p-2">
-                                            <h3 class="text-xl font-semibold text-gray-900">
-                                                {{ $achiever->first_name }} {{ $achiever->last_name }}
-                                            </h3>
+                                        <div class="flex">
+                                            <div class="p-2">
+                                                <h3 class="text-xl font-semibold text-gray-900">
+                                                    {{ $scoresheet->person->first_name }} {{ $scoresheet->person->last_name }}
+                                                </h3>
+                                            </div>
+                                            <div class="p-2">
+                                                <p class="text-base text-gray-500">
+                                                    {{ $scoresheet->highest_achievement->award->name }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </a>
                                 </li>
