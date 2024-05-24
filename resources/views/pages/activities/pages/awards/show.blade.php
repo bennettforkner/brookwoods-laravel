@@ -17,7 +17,7 @@
 									<a href="#">
 										<div class="p-2">
 											<h2 class="text-xl font-semibold text-gray-900">
-												{{ $achievement->person->first_name }} {{ $achievement->person->last_name }}
+												{{ $achievement->scoresheet->person->first_name }} {{ $achievement->scoresheet->person->last_name }}
 											</h2>
 											<div class="text-base text-gray-500">
 												{{ $achievement->date }}

@@ -22,10 +22,11 @@ class Award extends Model
         return $this->hasMany(Achievement::class);
     }
 
-    protected function achievers_this_year(): HasManyThrough
+    protected function scoresheets_this_year(): HasManyThrough
     {
-        return $this->hasManyThrough(Person::class, Achievement::class)
-            ->whereYear('achievements.created_at', now()->year);
+        return $this->hasManyThrough(Scoresheet::class, Achievement::class)
+            ->whereYear('achievements.created_at', now()->year)
+            ->distinct();
     }
 
     protected function activity(): BelongsTo

@@ -10,9 +10,9 @@ class Achievement extends Model
 {
     use HasFactory;
 
-    protected function person(): BelongsTo
+    protected function scoresheet(): BelongsTo
     {
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(Scoresheet::class);
     }
 
     protected function award(): BelongsTo

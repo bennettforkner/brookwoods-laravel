@@ -19,11 +19,12 @@ class Activity extends Model
     protected function achievers_this_year(): HasManyThrough
     {
         return $this->hasManyThrough(Achievement::class, Award::class)
-            ->leftJoin('people', 'achievements.person_id', '=', 'people.id')
-            ->select('people.*')
+            ->leftJoin('scoresheets', 'achievements.scoresheet_id', '=', 'scoresheets.id')
+            ->leftJoin('people', 'scoresheets.person_id', '=', 'people.id')
             ->whereYear('achievements.date', now()->year)
             ->orderBy('people.first_name')
             ->orderBy('people.last_name')
+            ->select('people.*')
             ->distinct();
     }
 }
