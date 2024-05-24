@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Pages\Blog\ShowController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AwardController;
 
-Route::get('/', HomeController::class)->name('home');
+Route::view('/', 'pages.home')->name('home');
 
 Route::get('activities', [ActivityController::class, 'index'])->name('activites');
+Route::get('activities/{activity_id}', [ActivityController::class, 'show'])->name('activities.show');
+Route::get('/activities/{activity_id}/awards/{award_id}', [AwardController::class, 'show'])->name('activities.awards.show');
