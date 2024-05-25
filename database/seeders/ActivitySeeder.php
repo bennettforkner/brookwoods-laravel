@@ -31,6 +31,66 @@ class ActivitySeeder extends Seeder
                 'status' => 'active',
                 'slug' => 'riflery',
             ],
+            [
+                'name' => 'Canoeing',
+                'description' => 'Paddle faster!',
+                'status' => 'active',
+                'slug' => 'canoeing',
+            ],
+            [
+                'name' => 'Swimming',
+                'description' => 'Don\'t forget to breathe!',
+                'status' => 'active',
+                'slug' => 'swimming',
+            ],
+            [
+                'name' => 'Hiking',
+                'description' => 'Don\'t forget your water bottle!',
+                'status' => 'active',
+                'slug' => 'hiking',
+            ],
+            [
+                'name' => 'Fishing',
+                'description' => 'Catch the big one!',
+                'status' => 'active',
+                'slug' => 'fishing',
+            ],
+            [
+                'name' => 'Climbing',
+                'description' => 'Don\'t look down!',
+                'status' => 'active',
+                'slug' => 'climbing',
+            ],
+            [
+                'name' => 'Mountain Biking',
+                'description' => 'Watch out for the trees!',
+                'status' => 'active',
+                'slug' => 'mountain-biking',
+            ],
+            [
+                'name' => 'Kayaking',
+                'description' => 'Paddle faster!',
+                'status' => 'active',
+                'slug' => 'kayaking',
+            ],
+            [
+                'name' => 'Mountain Boarding',
+                'description' => 'Don\'t forget your helmet!',
+                'status' => 'active',
+                'slug' => 'mountain-boarding',
+            ],
+            [
+                'name' => 'Surfing',
+                'description' => 'Hang ten!',
+                'status' => 'active',
+                'slug' => 'surfing',
+            ],
+            [
+                'name' => 'Skateboarding',
+                'description' => 'Don\'t forget your knee pads!',
+                'status' => 'active',
+                'slug' => 'skateboarding',
+            ]
         ];
 
         foreach ($activities as $activity) {
