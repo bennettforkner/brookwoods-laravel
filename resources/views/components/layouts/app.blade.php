@@ -5,8 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>{{ $title ?? 'BWDR Web App' }}</title>
+
+        @livewireStyles
+
     </head>
     <body>
         {{ $slot }}
+
+        @livewireScripts
+
     </body>
 </html>
