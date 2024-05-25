@@ -1,8 +1,13 @@
 #!/bin/bash
+cd /home/admin/web/app.campbrookwoods.org/public_html
+
 # redirect stdout/stderr to a file
 exec >git-deploy.log 2>&1
 
-cd /home/admin/web/app.bennettforkner.com/public_html
+git config --global --add safe.directory /home/admin/web/app.campbrookwoods.org/public_html
+
+git fetch
+
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
