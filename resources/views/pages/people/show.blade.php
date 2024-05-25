@@ -42,9 +42,11 @@
 											<h2 class="text-xl font-semibold text-gray-900">
 												{{ $scoresheet->activity->name }}
 											</h2>
-											<div class="text-base text-gray-500">
-												&#8593; {{ $scoresheet->highest_achievement->award->name }}
-											</div>
+											@if($scoresheet?->highest_achievement)
+												<div class="text-base text-gray-500">
+													&#8593; {{ $scoresheet->highest_achievement->award?->name ?? '' }}
+												</div>
+											@endif
 										</div>
 									</a>
 								</li>

@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ActivitySeeder::class,
-            PersonSeeder::class,
             AwardSeeder::class,
+            PersonSeeder::class,
             ScoresheetSeeder::class,
             AchievementSeeder::class,
         ]);

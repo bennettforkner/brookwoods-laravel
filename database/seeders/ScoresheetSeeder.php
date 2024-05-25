@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Activity;
+use App\Models\Person;
+use App\Models\Scoresheet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,26 +15,18 @@ class ScoresheetSeeder extends Seeder
      */
     public function run(): void
     {
-        $scoresheets = [
-            [
-                'person_id' => 1,
-                'activity_id' => 2,
-                'created_at' => '2024-08-01'
-            ],
-            [
-                'person_id' => 2,
-                'activity_id' => 2,
-                'created_at' => '2024-07-04'
-            ],
-            [
-                'person_id' => 3,
-                'activity_id' => 2,
-                'created_at' => '2024-06-07'
-            ]
-        ];
-
-        foreach ($scoresheets as $scoresheet) {
-            \App\Models\Scoresheet::create($scoresheet);
-        }
+        Person::all()->each(function ($person) {
+            $allActivities = Activity::all();
+            
+            $allActivities->each(function ($activity) use ($person) {
+                if (rand(0, 8) === 0) {
+                    Scoresheet::create([
+                        'activity_id' => $activity->id,
+                        'person_id' => $person->id,
+                        'created_at' => now()->subDays(rand(1, 365 * 5))
+                    ]);
+                }
+            });
+        });
     }
 }

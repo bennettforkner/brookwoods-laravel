@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Achievement;
+use App\Models\Scoresheet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,41 +14,24 @@ class AchievementSeeder extends Seeder
      */
     public function run(): void
     {
-        $achievements = [
-            [
-                'scoresheet_id' => 1,
-                'award_id' => 1,
-                'date' => '2024-08-01'
-            ],
-            [
-                'scoresheet_id' => 1,
-                'award_id' => 2,
-                'date' => '2024-07-04'
-            ],
-            [
-                'scoresheet_id' => 1,
-                'award_id' => 3,
-                'date' => '2024-06-07'
-            ],
-            [
-                'scoresheet_id' => 2,
-                'award_id' => 1,
-                'date' => '2024-08-01'
-            ],
-            [
-                'scoresheet_id' => 3,
-                'award_id' => 1,
-                'date' => '2024-08-01'
-            ],
-            [
-                'scoresheet_id' => 3,
-                'award_id' => 2,
-                'date' => '2024-07-04'
-            ]
-        ];
+        $scoresheets = Scoresheet::all();
 
-        foreach ($achievements as $achievement) {
-            \App\Models\Achievement::create($achievement);
-        }
+        $scoresheets->each(function ($scoresheet) {
+
+            $availableAwards = $scoresheet->activity->awards->sortBy('order');
+            $awardCountToCreate = rand(0, $availableAwards->count());
+
+            $achievementDate = $scoresheet->created_at;
+
+            for ($i = 0; $i < $awardCountToCreate; $i++) {
+                $achievementDate = $achievementDate->addDays(rand(0, (now()->diffInDays($achievementDate) - 1)));
+                $award = $availableAwards[$i];
+                Achievement::create([
+                    'scoresheet_id' => $scoresheet->id,
+                    'award_id' => $award->id,
+                    'date' => $achievementDate
+                ]);
+            }
+        });
     }
 }

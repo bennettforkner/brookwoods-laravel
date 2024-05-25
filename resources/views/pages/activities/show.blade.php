@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="p-2">
                                                 <p class="text-base text-gray-500">
-                                                    {{ $scoresheet->highest_achievement->award->name }}
+                                                    {{ $scoresheet?->highest_achievement?->award?->name ?? '' }}
                                                 </p>
                                             </div>
                                         </div>
