@@ -16,10 +16,11 @@ class ActivityController extends Controller
         return view('pages.activities.index', ['activities' => $activitites]);
     }
 
-    function show($activity_id) {
-        $activity = Activity::find($activity_id);
+    function show($activity_slug) {
+        $activity = Activity::where('slug', $activity_slug)
+            ->firstOrFail();
 
-        $scoresheets = Scoresheet::where('activity_id', $activity_id)
+        $scoresheets = Scoresheet::where('activity_id', $activity->id)
             ->orderBy('created_at', 'desc')
             ->get();
 

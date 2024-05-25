@@ -16,7 +16,7 @@
                         <ul class="list-group">
                             @foreach($activity->awards as $award)
                                 <li class="list-group-item">
-                                    <a href="{{ route('activities.awards.show', ['activity_id' => $award->activity_id, 'award_id' => $award->id]) }}">
+                                    <a href="{{ route('activities.awards.show', ['activity_slug' => $award->activity->slug, 'award_id' => $award->id]) }}">
                                         <div class="p-2">
                                             <h3 class="text-l font-semibold text-gray-900">
                                                 {{ $award->name }}

@@ -1,4 +1,4 @@
-<a href="{{ route('activities.show', ['activity_id' => $activity->id]) }}">
+<a href="{{ route('activities.show', ['activity_slug' => $activity->slug]) }}">
 	<div class="bg-white rounded-lg shadow-lg">
 		<div class="p-6" style="height: 150px;">
 			<h2 class="text-xl font-semibold text-gray-900">{{ $activity->name }}</h2>
