@@ -16,6 +16,7 @@ BASE=$(git merge-base @ "$UPSTREAM")
 if [ $LOCAL = $REMOTE ]; then
     echo "Up-to-date"
 elif [ $LOCAL = $BASE ]; then
+    git reset --hard HEAD
     git pull
     npm install
     npm run build
