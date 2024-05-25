@@ -15,17 +15,17 @@ class ScoresheetSeeder extends Seeder
         $scoresheets = [
             [
                 'person_id' => 1,
-                'activity_id' => 1,
+                'activity_id' => 2,
                 'created_at' => '2024-08-01'
             ],
             [
                 'person_id' => 2,
-                'activity_id' => 1,
+                'activity_id' => 2,
                 'created_at' => '2024-07-04'
             ],
             [
                 'person_id' => 3,
-                'activity_id' => 1,
+                'activity_id' => 2,
                 'created_at' => '2024-06-07'
             ]
         ];
