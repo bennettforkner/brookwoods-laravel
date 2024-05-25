@@ -20,6 +20,6 @@ elif [ $LOCAL = $BASE ]; then
     npm install
     npm run build
     composer install
-    php artisan migrate:fresh --seed
+    php artisan migrate:fresh --seed --force
     php artisan cache:clear
 fi
