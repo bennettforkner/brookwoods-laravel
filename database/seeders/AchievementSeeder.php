@@ -31,7 +31,8 @@ class AchievementSeeder extends Seeder
                 Achievement::create([
                     'scoresheet_id' => $scoresheet->id,
                     'award_id' => $award->id,
-                    'date' => $achievementDate
+                    'date' => $achievementDate,
+                    'points' => $award->has_points ? $award->points : null,
                 ]);
             }
         });

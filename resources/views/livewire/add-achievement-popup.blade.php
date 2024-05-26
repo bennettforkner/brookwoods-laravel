@@ -54,9 +54,24 @@
         }
     </style>
     <div>
+    @if($scoresheet->achievements->contains('award_id', $award->id))
+        @php $achievement = $scoresheet->achievements->where('award_id', $award->id)->first() @endphp
+        <div class='py-2' wire:click="open">
+            <span class="text-base p-1 rounded" style='background-color: green; color: white;'>
+                &#x2713; {{ $achievement->date }}
+            </span>
+            @if($award->has_points)
+                &nbsp;
+                <span class="text-base p-1 rounded" style='background-color: #66806688; color: white;'>
+                    {{ $achievement->points }} points
+                </span>
+            @endif
+        </div>
+    @else
         <button type='button' class="btn border px-8 rounded mx-2" style='border-color: #ff000066; color: #ff000066;' wire:click="open">
             + {{ $isOpen ? 'Close' : 'Add' }} {{ $award->name }}
         </button>
+    @endif
             <div class="modal" id="add-achievement-popup" tabindex="-1" role="dialog" style="display:{{ $isOpen ? 'block' : 'none' }};">
                 <div class="modal-dialog" role="document" >
                     <div class="modal-content">
@@ -89,7 +104,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" wire:click="closeAchievementModal">Close</button>
+                            <button type="button" class="btn btn-secondary" wire:click="close">Close</button>
                             <button type="button" class="btn btn-primary" wire:click="addAchievement">Save changes</button>
                         </div>
                     </div>

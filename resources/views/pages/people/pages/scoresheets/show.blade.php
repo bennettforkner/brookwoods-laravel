@@ -26,15 +26,8 @@
 												</h2>
 											</a>
 										</div>
-										@if($scoresheet->achievements->contains('award_id', $award->id))
-											<div class='py-2'>
-												<span class="text-base p-1 rounded" style='background-color: green; color: white;'>
-													&#x2713; {{ $scoresheet->achievements->where('award_id', $award->id)->first()->date }}
-												</span>
-											</div>
-										@else
-											@livewire('add-achievement-popup', ['award' => $award, 'scoresheet' => $scoresheet])
-										@endif
+										@livewire('add-achievement-popup', ['award' => $award, 'scoresheet' => $scoresheet])
+										
 									</div>
 								</li>
 							@endforeach

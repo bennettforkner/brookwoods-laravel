@@ -30,7 +30,7 @@ class AddAchievementPopup extends Component
             'points' => $this->points,
         ]);
 
-        return redirect(request()->header('Referer'));
+        $this->close();
     }
 
     public function open()
