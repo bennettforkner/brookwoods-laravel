@@ -25,7 +25,7 @@ class Activity extends Model
         parent::boot();
 
         static::creating(function ($activity) {
-            $activity->color = Visuals::stringToColorCode($activity->name);
+            $activity->color = '#' . Visuals::stringToColorCode($activity->name);
         });
     }
 

@@ -95,7 +95,7 @@ class ActivitySeeder extends Seeder
         ];
 
         foreach ($activities as $activity) {
-            $activity['color'] = '#' . Visuals::stringToColorCode($activity['name']);
+            $activity['color'] = ('#' . Visuals::stringToColorCode($activity['name']));
             Activity::create($activity);
         }
     }

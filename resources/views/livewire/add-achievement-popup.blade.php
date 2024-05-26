@@ -16,7 +16,8 @@
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%;
+            width: 100%;
+            max-width: 400px;
         }
         .modal-header {
             display: flex;
@@ -57,7 +58,7 @@
             + {{ $isOpen ? 'Close' : 'Add' }} {{ $award->name }}
         </button>
             <div class="modal" id="add-achievement-popup" tabindex="-1" role="dialog" style="display:{{ $isOpen ? 'block' : 'none' }};">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog" role="document" >
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2 class="modal-title">Add Achievement</h2>
