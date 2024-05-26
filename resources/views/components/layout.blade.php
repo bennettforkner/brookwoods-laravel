@@ -25,9 +25,9 @@
                         </a>
                     </div>
                     <div class="flex lg:gap-x-12">
-                        <a href="{{ route('home') }}" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
-                        <a href="{{ route('activities') }}" class="text-sm font-semibold leading-6 text-gray-900">Activities</a>
-                        <a href="{{ route('people') }}" class="text-sm font-semibold leading-6 text-gray-900">People</a>
+                        <a href="{{ route('home') }}" class="text-lg font-semibold leading-6 text-gray-900">Home</a>
+                        <a href="{{ route('activities') }}" class="text-lg font-semibold leading-6 text-gray-900">Activities</a>
+                        <a href="{{ route('people') }}" class="text-lg font-semibold leading-6 text-gray-900">People</a>
                     </div>
                     <div class="flex lg:flex-1 lg:justify-end">
                         <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
@@ -45,7 +45,6 @@
                 <footer aria-labelledby="footer-heading" class="relative border-t border-gray-900/10 py-24 sm:mt-56 sm:py-32">
                     <h2 id="footer-heading" class="sr-only">Footer</h2>
                     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                        
                     </div>
                 </footer>
             </div>
