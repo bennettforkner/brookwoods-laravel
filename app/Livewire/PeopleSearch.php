@@ -22,8 +22,8 @@ class PeopleSearch extends Component
     {
         $people = Person::where('first_name', 'like', '%' . $this->search . '%')
             ->orWhere('last_name', 'like', '%' . $this->search . '%')
-            ->orderByDesc('first_name')
-            ->orderByDesc('last_name')
+            ->orderBy('first_name')
+            ->orderBy('last_name')
             ->paginate(20);
             
         return view('livewire.people-search', ['people' => $people]);
