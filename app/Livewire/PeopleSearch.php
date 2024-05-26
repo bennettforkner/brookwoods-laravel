@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Person;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class PeopleSearch extends Component
 {
@@ -20,10 +21,10 @@ class PeopleSearch extends Component
 
     public function render()
     {
-        $people = Person::where('first_name', 'like', '%' . $this->search . '%')
-            ->orWhere('last_name', 'like', '%' . $this->search . '%')
-            ->orderBy('first_name')
+        $people = Person::where(DB::raw('CONCAT(first_name, \' \', last_name)'), 'like', '%' . $this->search . '%')
+            ->orWhere(DB::raw('CONCAT(nickname, \' \', last_name)'), 'like', '%' . $this->search . '%')
             ->orderBy('last_name')
+            ->orderBy('first_name')
             ->paginate(20);
             
         return view('livewire.people-search', ['people' => $people]);
