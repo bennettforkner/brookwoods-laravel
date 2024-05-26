@@ -30,8 +30,17 @@
                         <a href="{{ route('people') }}" class="text-lg font-semibold leading-6 text-gray-900">People</a>
                     </div>
                     <div class="flex lg:flex-1 lg:justify-end">
-                        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                        @if(Auth::check())
+                            <span class="text-sm font-semibold leading-6 text-gray-900">Logged in as
+                                <span class="underline">{{ Auth::user()->name }}</span>
+                            </span>
+                            <span>&emsp;|&emsp;</span>
+                            <a href="{{ route('logout') }}" class="text-sm font-semibold leading-6 text-gray-900">Log out <span
                                 aria-hidden="true">&rarr;</span></a>
+                        @else
+                            <a href="{{ route('login')}}" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                                aria-hidden="true">&rarr;</span></a>
+                        @endif
                     </div>
                 </nav>
             </header>
