@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 class PeopleSearch extends Component
 {
     use WithPagination;
-    //protected $paginationTheme = 'bootstrap';
 
     public $search = null;
 
