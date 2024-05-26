@@ -21,6 +21,6 @@ elif [ $LOCAL = $BASE ]; then
     npm install
     npm run build
     composer install
-    php artisan migrate
+    php artisan migrate --force
     php artisan cache:clear
 fi
