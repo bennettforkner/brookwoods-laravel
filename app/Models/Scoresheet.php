@@ -12,6 +12,11 @@ class Scoresheet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'person_id',
+        'activity_id',
+    ];
+
     protected function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);

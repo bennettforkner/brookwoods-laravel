@@ -31,6 +31,19 @@
 									<option value='F'>Female</option>
 								</select>
 							</div>
+							<hr />
+							<div>
+								<label for="scoresheets_comma_separated" class="block text-lg font-medium text-gray-700">Activity Scoresheets</label>
+								<input type="hidden" name="scoresheets_comma_separated" id="scoresheets_comma_separated" value="">
+								<div class="mb-4">
+									@foreach($activities as $activity)
+										<div class='w-1/3 d-inline-block'>
+											<input type='checkbox' name="activity_{{ $activity->id }}" id="activity_{{ $activity->id }}" class="mt-1 p-2 border" />
+											&nbsp;<label for="activity_{{ $activity->id }}" class="inline-block text-sm font-medium text-gray-700">{{ $activity->name }}</label>
+										</div>
+									@endforeach
+								</div>
+							</div>
 							<div class="mb-4">
 								<input type="submit" value="Create Person" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
 							</div>
@@ -41,3 +54,15 @@
 		</div>
 	</x-color-background-section>
 </x-layout>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const scoresheets = document.querySelectorAll('input[name^="activity_"]');
+		const scoresheetsCommaSeparated = document.getElementById('scoresheets_comma_separated');
+		scoresheets.forEach(scoresheet => {
+			scoresheet.addEventListener('change', function() {
+				const selectedScoresheets = Array.from(scoresheets).filter(scoresheet => scoresheet.checked).map(scoresheet => scoresheet.id.replace('activity_', ''));
+				scoresheetsCommaSeparated.value = selectedScoresheets.join(',');
+			});
+		});
+	});
+</script>

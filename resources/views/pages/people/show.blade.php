@@ -37,7 +37,7 @@
 						<ul class="list-group">
 							@foreach($person->scoresheets as $scoresheet)
 								<li class="list-group-item">
-									<a href="{{ route('activities.show', ['activity_slug' => $scoresheet->activity->slug]) }}">
+									<a href="{{ route('people.scoresheets.show', ['person_id' => $person->id, 'scoresheet_id' => $scoresheet->id]) }}">
 										<div class="p-2">
 											<h2 class="text-xl font-semibold text-gray-900">
 												{{ $scoresheet->activity->name }}
