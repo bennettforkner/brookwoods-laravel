@@ -4,7 +4,7 @@
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl text-center">
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        {{ $activity->name }}
+                        @include('components.activity-tag', ['activity' => $activity])
                     </h1>
                     <p class="mt-4 text-base text-gray-500">{{ $activity->description }}</p>
                 </div>

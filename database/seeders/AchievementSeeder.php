@@ -24,7 +24,9 @@ class AchievementSeeder extends Seeder
             $achievementDate = $scoresheet->created_at;
 
             for ($i = 0; $i < $awardCountToCreate; $i++) {
-                $achievementDate = $achievementDate->addDays(rand(0, (now()->diffInDays($achievementDate) - 1)));
+                $maxDaysToAdd = now()->diffInDays($scoresheet->created_at);
+                $daysToAdd = rand(0, $maxDaysToAdd > 10 ? 10 : $maxDaysToAdd);
+                $achievementDate = $achievementDate->addDays($daysToAdd);
                 $award = $availableAwards[$i];
                 Achievement::create([
                     'scoresheet_id' => $scoresheet->id,

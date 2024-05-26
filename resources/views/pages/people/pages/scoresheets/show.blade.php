@@ -3,11 +3,11 @@
 		<div class="py-6 sm:py-10">
 			<div class="mx-auto max-w-7xl px-6 lg:px-8">
 				<div class="mx-auto max-w-2xl text-center">
-					<h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+					<h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
 						{{ $person->first_name }} {{ $person->last_name }}
 					</h1>
 					<h2 class="text-lg font-bold tracking-tight text-gray-500 sm:text-4xl">
-						{{ $scoresheet->activity->name }}
+						@include('components.activity-tag', ['activity' => $scoresheet->activity])
 					</h2>
 				</div>
 				<div class="flex">
@@ -18,22 +18,22 @@
 						<ul class="list-group">
 							@foreach($scoresheet->activity->awards as $award)
 								<li class="list-group">
-									<div class="p-2 flex">
-										<a href="{{ route('activities.awards.show', ['activity_slug' => $award->activity->slug, 'award_id' => $award->id]) }}">
-											<div class="w-1/3">
-												<h2 class="text-xl font-semibold text-gray-900">
-													{{ $award->activity->name }}: {{ $award->name }}
+									<div class="flex">
+										<div class='p-1'>
+											<a href="{{ route('activities.awards.show', ['activity_slug' => $award->activity->slug, 'award_id' => $award->id]) }}">
+												<h2 class="text-xl font-semibold text-gray-900 p-0">
+													{{ $award->name }}
 												</h2>
-											<div>
-										</a>
+											</a>
+										</div>
 										@if($scoresheet->achievements->contains('award_id', $award->id))
-											<div class="text-base text-gray-500 w-1/3">
-												{{ $scoresheet->achievements->where('award_id', $award->id)->first()->date }}
+											<div class='py-2'>
+												<span class="text-base p-1 rounded" style='background-color: green; color: white;'>
+													&#x2713; {{ $scoresheet->achievements->where('award_id', $award->id)->first()->date }}
+												</span>
 											</div>
 										@else
-											<button type='button' class="btn btn-primary">
-												+
-											</button>
+											@livewire('add-achievement-popup', ['award' => $award, 'scoresheet' => $scoresheet])
 										@endif
 									</div>
 								</li>

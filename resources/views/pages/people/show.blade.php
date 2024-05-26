@@ -14,12 +14,18 @@
 							<h1 class="text-2xl font-semibold text-gray-900">Recent Awards</h1>
 						</div>
 						<ul class="list-group">
-							@foreach($person->achievements as $achievement)
+							@php
+								// Sort the achievements by date and award order, then take the top 5
+								$achievements = $person->achievements->sortByDesc(fn ($achievement) =>
+									$achievement->date . '-' . $achievement->award->order
+								)->take(5);
+							@endphp
+							@foreach($achievements as $achievement)
 								<li class="list-group">
 									<a href="{{ route('activities.awards.show', ['activity_slug' => $achievement->award->activity->slug, 'award_id' => $achievement->award->id]) }}">
 										<div class="p-2">
 											<h2 class="text-xl font-semibold text-gray-900">
-												{{ $achievement->award->activity->name }}: {{ $achievement->award->name }}
+												@include('components.activity-tag', ['activity' => $achievement->award->activity]) {{ $achievement->award->name }}
 											</h2>
 											<div class="text-base text-gray-500">
 												{{ $achievement->date }}
@@ -40,7 +46,7 @@
 									<a href="{{ route('people.scoresheets.show', ['person_id' => $person->id, 'scoresheet_id' => $scoresheet->id]) }}">
 										<div class="p-2">
 											<h2 class="text-xl font-semibold text-gray-900">
-												{{ $scoresheet->activity->name }}
+												@include('components.activity-tag', ['activity' => $scoresheet->activity, 'should_link' => false])
 											</h2>
 											@if($scoresheet?->highest_achievement)
 												<div class="text-base text-gray-500">
@@ -53,8 +59,7 @@
 							@endforeach
 						</ul>
 					</div>
-					
-				</div
+				</div>
 			</div>
 		</div>
 	</x-color-background-section>

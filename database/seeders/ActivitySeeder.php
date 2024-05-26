@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Providers\Visuals;
+use App\Models\Activity;
 
 class ActivitySeeder extends Seeder
 {
@@ -94,7 +95,8 @@ class ActivitySeeder extends Seeder
         ];
 
         foreach ($activities as $activity) {
-            \App\Models\Activity::create($activity);
+            $activity['color'] = '#' . Visuals::stringToColorCode($activity['name']);
+            Activity::create($activity);
         }
     }
 }

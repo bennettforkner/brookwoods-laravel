@@ -10,6 +10,13 @@ class Achievement extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'scoresheet_id',
+        'award_id',
+        'date',
+        'points',
+    ];
+
     protected function scoresheet(): BelongsTo
     {
         return $this->belongsTo(Scoresheet::class);
