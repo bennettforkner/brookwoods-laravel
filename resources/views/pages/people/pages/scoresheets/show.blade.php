@@ -23,11 +23,13 @@
 											<a href="{{ route('activities.awards.show', ['activity_slug' => $award->activity->slug, 'award_id' => $award->id]) }}">
 												<h2 class="text-xl font-semibold text-gray-900 p-0">
 													{{ $award->name }}
+													@if($award->short_name)
+														[{{ $award->short_name }}]
+													@endif
 												</h2>
 											</a>
 										</div>
 										@livewire('add-achievement-popup', ['award' => $award, 'scoresheet' => $scoresheet])
-										
 									</div>
 								</li>
 							@endforeach

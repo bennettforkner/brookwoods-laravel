@@ -32,7 +32,7 @@ class AchievementSeeder extends Seeder
                     'scoresheet_id' => $scoresheet->id,
                     'award_id' => $award->id,
                     'date' => $achievementDate,
-                    'points' => $award->has_points ? $award->points : null,
+                    'points' => $award->has_points ? ($award->points + rand(0, $award->points / 10)) : null,
                 ]);
             }
         });
