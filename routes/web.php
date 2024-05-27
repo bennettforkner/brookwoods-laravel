@@ -6,6 +6,8 @@ use App\Http\Controllers\AwardController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ScoresheetController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\SessionsController;
 use App\Livewire\PeopleSearch;
 
 Route::view('/', 'pages.home')->name('home');
@@ -25,5 +27,10 @@ Route::middleware('auth')->group(function () {
 	Route::get('people/{person_id}/scoresheets/{scoresheet_id}', [ScoresheetController::class, 'show'])->name('people.scoresheets.show');
 
 	Route::get('auth/logout', [AuthController::class, 'logout'])->name('logout');
+
+	Route::get('sessions', [SessionsController::class, 'index'])->name('sessions.index');
+	Route::get('sessions/{session}', [SessionsController::class, 'show'])->name('sessions.show');
+
+	Route::get('pdfs/activity-signups', [PDFController::class, 'generateActivitySignupsPDF'])->name('pdfs.activity-signups');
 
 });
