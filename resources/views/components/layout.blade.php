@@ -48,9 +48,11 @@
 
             <main class="isolate mt-20">
                  @if ($errors->any())
+                    <div class="w-full" style="position: fixed; bottom:0;left:0;z-index: 9999;">
                     @foreach ($errors->all() as $error)
-                        <div class="bg-red-400 text-center p-2 w-full" style="position: fixed; bottom:0;left:0;z-index: 9999;">{{$error}}</div>
+                        <div class="bg-red-400 text-center p-2 w-full">{{$error}}</div>
                     @endforeach
+                    </div>
                 @endif
                 {{ $slot }}
             </main>
