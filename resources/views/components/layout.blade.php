@@ -28,6 +28,7 @@
                         <a href="{{ route('home') }}" class="text-lg font-semibold leading-6 text-gray-900">Home</a>
                         <a href="{{ route('activities') }}" class="text-lg font-semibold leading-6 text-gray-900">Activities</a>
                         <a href="{{ route('people') }}" class="text-lg font-semibold leading-6 text-gray-900">People</a>
+                        <a href="{{ route('sessions.index') }}" class="text-lg font-semibold leading-6 text-gray-900">Sessions</a>
                     </div>
                     <div class="flex lg:flex-1 lg:justify-end">
                         @if(Auth::check())
