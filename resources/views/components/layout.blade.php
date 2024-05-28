@@ -47,6 +47,11 @@
             </header>
 
             <main class="isolate mt-20">
+                 @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="bg-red-400 text-center p-2 w-full" style="position: fixed; bottom:0;left:0;z-index: 9999;">{{$error}}</div>
+                    @endforeach
+                @endif
                 {{ $slot }}
             </main>
 
