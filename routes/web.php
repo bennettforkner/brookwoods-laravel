@@ -33,4 +33,6 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('pdfs/activity-signups', [PDFController::class, 'generateActivitySignupsPDF'])->name('pdfs.activity-signups');
 
+	Route::post('sessions/{session}/people-csv', [SessionsController::class, 'storePeopleCSV'])->name('sessions.people-csv.store');
+
 });

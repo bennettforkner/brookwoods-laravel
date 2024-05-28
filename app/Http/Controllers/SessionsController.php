@@ -12,7 +12,7 @@ class SessionsController extends Controller
     {
         $sessions = Session::all();
 
-        return view('sessions.index', compact('sessions'));
+        return view('pages.sessions.index', compact('sessions'));
     }
 
     public function show(Session $session)
@@ -64,6 +64,32 @@ class SessionsController extends Controller
         ]);
 
         $people = collect($request->people);
+
+        $people->each(function ($personId) use ($session) {
+            DB::table('people_sessions')->insert([
+                'person_id' => $personId,
+                'session_id' => $session->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        });
+
+        return redirect()->route('sessions.show', $session);
+    }
+
+    public function storePeopleCSV(Request $request, Session $session)
+    {
+        $request->validate([
+            'csv' => 'required|file',
+        ]);
+
+        $csv = array_map('str_getcsv', file($request->file('csv')));
+
+        dd($csv);
+
+        $people = collect($csv)->map(function ($row) {
+            return $row[0];
+        });
 
         $people->each(function ($personId) use ($session) {
             DB::table('people_sessions')->insert([
