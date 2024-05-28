@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use ValueError;
 
 class SessionsController extends Controller
 {
@@ -17,12 +19,12 @@ class SessionsController extends Controller
 
     public function show(Session $session)
     {
-        return view('sessions.show', compact('session'));
+        return view('pages.sessions.show', compact('session'));
     }
 
     public function create()
     {
-        return view('sessions.create');
+        return view('pages.sessions.create');
     }
 
     public function store(Request $request)
@@ -79,25 +81,47 @@ class SessionsController extends Controller
 
     public function storePeopleCSV(Request $request, Session $session)
     {
+        $requiredColumns = ['SerialNumber', 'FirstName', 'LastName'];
+        $optionalColumns = ['DateOfBirth'];
+
         $request->validate([
             'csv' => 'required|file',
         ]);
 
         $csv = array_map('str_getcsv', file($request->file('csv')));
 
-        dd($csv);
+        $columns = array_shift($csv);
 
-        $people = collect($csv)->map(function ($row) {
-            return $row[0];
-        });
+        if (count(array_diff($requiredColumns, $columns)) > 0) {
+            return back()->withErrors('CSV is missing required columns: ' . implode(', ', array_diff($requiredColumns, $columns)));
+        }
 
-        $people->each(function ($personId) use ($session) {
-            DB::table('people_sessions')->insert([
-                'person_id' => $personId,
-                'session_id' => $session->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        foreach ($csv as $key => $row) {
+            try {
+                $csv[$key] = array_combine($columns, $row);
+            } catch (ValueError $e){
+                dd($row, $columns, $key, $e);
+            }
+        }
+
+        collect($csv)->each(function ($row) use ($session) {
+            $personId = Person::where('external_id', $row['SerialNumber'])->first()->id;
+
+            if (!$personId) {
+                $personId = Person::create([
+                    'first_name' => $row['FirstName'],
+                    'last_name' => $row['LastName'],
+                    'date_of_birth' => $row['DateOfBirth'] ?? null,
+                    'external_id' => $row['SerialNumber']
+                ]);
+            }
+            $existingPersonSession = DB::table('people_sessions')->where('person_id', $personId)->where('session_id', $session->id)->first();
+            if (!$existingPersonSession) {
+                DB::table('people_sessions')->insert([
+                    'person_id' => $personId,
+                    'session_id' => $session->id,
+                ]);
+            }
         });
 
         return redirect()->route('sessions.show', $session);
