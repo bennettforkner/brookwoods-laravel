@@ -16,7 +16,8 @@
 					<h2 class="text-xl font-semibold text-gray-900 mt-6">Upload Campers</h2>
 					<form action="{{ route('sessions.people-csv.store', ['session' => $session]) }}" method="POST" enctype="multipart/form-data">
 						@csrf
-						<input type="file" name="csv" class="mt-4" onchange="this.parentElement.submit()">
+						<input type="file" name="csv" class="mt-4 w-full" onchange="this.parentElement.submit()">
+						<label for="csv" class="text-sm text-gray-500">Upload a CSV file with the following columns: FirstName, LastName, SerialNumber</label>
 					</form>
 					<h2 class="text-xl font-semibold text-gray-900 mt-6">Dates</h2>
 					<p class="mt-4 text-base text-gray-500">{{ Carbon::parse($session->start_at)->format('m/d/Y') }} - {{ Carbon::parse($session->end_at)->format('m/d/Y') }}</p>
