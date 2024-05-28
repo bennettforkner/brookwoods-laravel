@@ -18,8 +18,8 @@ if [ $LOCAL = $REMOTE ]; then
 elif [ $LOCAL = $BASE ]; then
     git reset --hard HEAD
     git pull
-    npm install
-    npm run build
+    /home/admin/.nvm/versions/node/v20.13.1/bin/npm install
+    /home/admin/.nvm/versions/node/v20.13.1/bin/npm run build
     composer install
     php artisan migrate --force
     php artisan cache:clear
