@@ -24,3 +24,4 @@ elif [ $LOCAL = $BASE ]; then
     php artisan migrate --force
     php artisan cache:clear
 fi
+
