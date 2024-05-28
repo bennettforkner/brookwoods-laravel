@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,17 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+
+Artisan::command('make:user', function () {
+    $username = readline('Enter username: ');
+    $name = readline('Enter name: ');
+    $password = readline('Enter password: ');
+
+    User::create([
+        'name' => $name,
+        'username' => $username,
+        'password' => bcrypt($password),
+    ]);
+    $this->info('User created successfully');
+})->purpose('Create a new user');

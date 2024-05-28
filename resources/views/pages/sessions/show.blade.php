@@ -19,6 +19,16 @@
 						<input type="file" name="csv" class="mt-4 w-full" onchange="this.parentElement.submit()">
 						<label for="csv" class="text-sm text-gray-500">Upload a CSV file with the following columns: FirstName, LastName, SerialNumber</label>
 					</form>
+					<h2 class="text-xl font-semibold text-gray-900 mt-6">Print Activity Signups List for...</h2>
+					<form action="{{ route('pdfs.activity-signups', ['session' => $session]) }}" method="GET" target="_blank" enctype="multipart/form-data">
+						<input type="hidden" name="session_id" value="{{ $session->id }}">
+						<select name="activity_id" class="mt-4 w-full p-2" onchange="this.parentElement.submit()"">
+							<option value="">Select an activity...</option>
+							@foreach($activities as $activity)
+								<option value="{{ $activity->id }}">{{ $activity->name }}</option>
+							@endforeach
+						</select>
+					</form>
 					<h2 class="text-xl font-semibold text-gray-900 mt-6">Dates</h2>
 					<p class="mt-4 text-base text-gray-500">{{ Carbon::parse($session->start_at)->format('m/d/Y') }} - {{ Carbon::parse($session->end_at)->format('m/d/Y') }}</p>
 					<h2 class="text-xl font-semibold text-gray-900 mt-6">Attending Campers</h2>

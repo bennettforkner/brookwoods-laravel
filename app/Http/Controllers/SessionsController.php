@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Person;
 use App\Models\Session;
 use Illuminate\Http\Request;
@@ -19,7 +20,11 @@ class SessionsController extends Controller
 
     public function show(Session $session)
     {
-        return view('pages.sessions.show', compact('session'));
+        $activities = Activity::all()->sortByDesc('name');
+        return view('pages.sessions.show', [
+            'session' => $session,
+            'activities' => $activities
+        ]);
     }
 
     public function create()
