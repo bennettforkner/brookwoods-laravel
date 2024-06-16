@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
 
 	Route::get('sessions', [SessionsController::class, 'index'])->name('sessions.index');
 	Route::get('sessions/{session}', [SessionsController::class, 'show'])->name('sessions.show');
+	Route::get('create-session', [SessionsController::class, 'create'])->name('sessions.create');
+	Route::post('sessions', [SessionsController::class, 'store'])->name('sessions.store');
 
 	Route::get('pdfs/activity-signups', [PDFController::class, 'generateActivitySignupsPDF'])->name('pdfs.activity-signups');
 
