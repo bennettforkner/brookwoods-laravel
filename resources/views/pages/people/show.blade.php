@@ -69,7 +69,7 @@
 									<a href="{{ route('sessions.show', ['session' => $session->id]) }}">
 										<div class="p-2">
 											<div class="text-base text-gray-500">
-												{{ $session->naem }}
+												{{ $session->name }} ({{ $session->code }} {{ $session->year }})
 											</div>
 										</div>
 									</a>

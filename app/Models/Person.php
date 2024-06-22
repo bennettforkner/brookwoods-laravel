@@ -32,6 +32,7 @@ class Person extends Model
 
     protected function attended_sessions(): BelongsToMany
     {
-        return $this->belongsToMany(Session::class, 'people_sessions');
+        return $this->belongsToMany(Session::class, 'people_sessions')
+            ->orderBy('start_at', 'desc');
     }
 }
