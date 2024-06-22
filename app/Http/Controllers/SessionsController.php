@@ -110,15 +110,17 @@ class SessionsController extends Controller
         }
 
         collect($csv)->each(function ($row) use ($session) {
-            $personId = Person::where('external_id', $row['SerialNumber'])->first()->id;
+            $personId = Person::where('external_id', $row['SerialNumber'])->first()?->id;
 
             if (!$personId) {
-                $personId = Person::create([
+                $person = Person::create([
                     'first_name' => $row['FirstName'],
                     'last_name' => $row['LastName'],
                     'date_of_birth' => $row['DateOfBirth'] ?? null,
-                    'external_id' => $row['SerialNumber']
+                    'external_id' => intval($row['SerialNumber']) ?? null
                 ]);
+
+                $personId = $person->id;
             }
             $existingPersonSession = DB::table('people_sessions')->where('person_id', $personId)->where('session_id', $session->id)->first();
             if (!$existingPersonSession) {
