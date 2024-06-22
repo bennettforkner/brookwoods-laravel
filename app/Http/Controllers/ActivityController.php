@@ -24,6 +24,12 @@ class ActivityController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $scoresheets->filter(function ($scoresheet) {
+            return $scoresheet->achievements->filter(function ($achievement) {
+                return date_parse($achievement->date)['year'] == date('Y');
+            })->count() > 0;
+        });
+
         return view('pages.activities.show', ['activity' => $activity, 'scoresheets' => $scoresheets]);
     }
 }

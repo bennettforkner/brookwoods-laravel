@@ -37,7 +37,7 @@ class Activity extends Model
     protected function achievements_this_year(): HasManyThrough
     {
         return $this->hasManyThrough(Achievement::class, Award::class)
-            ->whereYear('achievements.date', now()->year)
+            ->whereRaw('YEAR(awards.date) = YEAR(NOW())')
             ->distinct();
     }
 }
