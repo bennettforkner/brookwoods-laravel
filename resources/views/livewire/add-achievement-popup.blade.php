@@ -56,7 +56,7 @@
     <div>
     @if($scoresheet->achievements->contains('award_id', $award->id))
         @php $achievement = $scoresheet->achievements->where('award_id', $award->id)->first() @endphp
-        <div class='py-2' wire:click="open">
+        <div class='py-2'>
             <span class="text-base p-1 rounded" style='background-color: green; color: white;'>
                 &#x2713; {{ $achievement->date }}
             </span>
