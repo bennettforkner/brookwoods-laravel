@@ -57,6 +57,7 @@
 									</a>
 								</li>
 							@endforeach
+							@livewire('add-scoresheet-popup', ['person' => $person])
 						</ul>
 					</div>
 					<div class="max-w-3xl px-6 lg:px-8 mt-20 w-1/3">
