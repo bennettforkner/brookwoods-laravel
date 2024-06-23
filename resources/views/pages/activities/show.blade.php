@@ -10,15 +10,15 @@
                 </div>
             </div>
             <div class="mx-auto max-w-7xl px-6 lg:px-8 mt-20 flex">
-                <div class="w-1/3">
+                <div class="lg:w-1/3 w-1/2">
                     <x-card :class="'mx-3 bg-white rounded-lg shadow-lg p-6'">
-                        <h2 class="text-xl font-semibold text-gray-900">Awards</h2>
+                        <h2 class="lg:text-xl text-sm font-semibold text-gray-900 pb-2">Awards</h2>
                         <ul class="list-group">
                             @foreach($activity->awards as $award)
                                 <li class="list-group-item">
                                     <a href="{{ route('activities.awards.show', ['activity_slug' => $award->activity->slug, 'award_id' => $award->id]) }}">
-                                        <div class="p-2">
-                                            <h3 class="text-l font-semibold text-gray-900">
+                                        <div>
+                                            <h3 class="lg:text-lg text-xs font-semibold text-gray-900">
                                                 {{ $award->name }}
                                                 @if($award->short_name)
                                                     [<span class='text-gray-800'>{{ $award->short_name }}</span>]
@@ -31,21 +31,21 @@
                         </ul>
                     </x-card>
                 </div>
-                <div class="w-2/3">
+                <div class="lg:w-2/3 w-1/2">
                     <x-card :class="'bg-white rounded-lg shadow-lg p-6'">
-                        <h2 class="text-xl font-semibold text-gray-900">Award Earners</h2>
+                        <h2 class="lg:text-xl text-sm font-semibold text-gray-900 pb-2">Award Earners (Current Year)</h2>
                         <ul class="list-group">
                             @foreach($scoresheets as $scoresheet)
                                 <li class="list-group-item">
                                     <a href="{{ route('people.show', ['person_id' => $scoresheet->person->id]) }}">
                                         <div class="flex">
-                                            <div class="p-2">
-                                                <h3 class="text-xl font-semibold text-gray-900">
+                                            <div class="lg:p-1">
+                                                <h3 class="lg:text-lg text-xs font-semibold text-gray-900">
                                                     {{ $scoresheet->person->first_name }} {{ $scoresheet->person->last_name }}
                                                 </h3>
                                             </div>
-                                            <div class="p-2">
-                                                <p class="text-base text-gray-500">
+                                            <div class="lg:p-1 pl-2">
+                                                <p class="lg:text-lg text-xs text-base text-gray-500">
                                                     {{ $scoresheet?->highest_achievement?->award?->name ?? '' }}
                                                 </p>
                                             </div>
