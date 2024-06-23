@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Activity;
 use Livewire\Component;
 use App\Models\Scoresheet;
+use Illuminate\Http\Request;
 
 class AddScoresheetPopup extends Component
 {
@@ -24,6 +25,7 @@ class AddScoresheetPopup extends Component
         ]);
 
         $this->close();
+        return redirect(request()->header('Referer'));
     }
 
     public function open()
@@ -39,7 +41,9 @@ class AddScoresheetPopup extends Component
     public function render()
     {
         return view('livewire.add-scoresheet-popup', [
-            'activities' => Activity::all()->sortBy('name')
+            'activities' => Activity::all()
+                ->whereNotIn('id', $this->person->scoresheets->pluck('activity_id'))
+                ->sortBy('name')
         ]);
     }
 }
