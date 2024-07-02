@@ -66,9 +66,16 @@
                     {{ $achievement->points }} points
                 </span>
             @endif
+            &nbsp;
+            <span class="text-base p-1 px-2 rounded d-inline-block cursor-pointer"
+                style='background-color: #ff000066; color: white;font-weight: bold;'
+                wire:click="deleteAchievement({{ $achievement->id }})"
+                wire:confirm="Are you sure you want to delete this achievement?">
+                -
+            </span>
         </div>
     @else
-        <button type='button' class="btn border px-8 rounded mx-2" style='border-color: #ff000066; color: #ff000066;' wire:click="open">
+        <button type='button' class="btn border px-6 rounded mx-2" style='border-color: #ff000066; color: #ff000066;padding: 2px 8px;' wire:click="open">
             + {{ $isOpen ? 'Close' : 'Add' }} {{ $award->name }}
         </button>
     @endif

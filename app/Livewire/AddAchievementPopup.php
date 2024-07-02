@@ -33,6 +33,12 @@ class AddAchievementPopup extends Component
         $this->close();
     }
 
+    public function deleteAchievement($achievementId)
+    {
+        Achievement::find($achievementId)->delete();
+        return redirect(request()->header('Referer'));
+    }
+
     public function open()
     {
         $this->dateAchieved = $this->dateAchieved ?? now()->format('Y-m-d');
