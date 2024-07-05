@@ -20,7 +20,7 @@
 								<input type="password" name="password" id="password" class="mt-1 block p-2 border w-full">
 							</div>
 							<div class="mb-4">
-								<input type="submit" value="Create Person" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+								<input type="submit" value="Sign In" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
 							</div>
 						</form>
 					</div>
