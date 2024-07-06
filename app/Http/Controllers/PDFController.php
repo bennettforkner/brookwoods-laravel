@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Achievement;
 use App\Models\Activity;
 use App\Models\Session;
 use Illuminate\Http\Request;
@@ -20,6 +21,22 @@ class PDFController extends Controller
             'session' => $session,
             'scoresheets' => $scoresheets,
             'activity' => $activity
+        ]);
+    }
+
+    public function generateActivityAchievementsListPDF(Request $request) {
+        $activity = Activity::find($request->activity_id);
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+
+        $achievements = Achievement::whereRaw('created_at BETWEEN ? AND ?', [$startDate, $endDate])
+            ->get();
+
+        return view('pdf.activity-achievements-list', [
+            'activity' => $activity,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'achievements' => $achievements
         ]);
     }
 }

@@ -19,6 +19,11 @@ class Session extends Model
         'year',
     ];
 
+    protected $casts = [
+        'start_at' => 'date',
+        'end_at' => 'date'
+    ];
+
     public function people()
     {
         return $this->belongsToMany(Person::class, 'people_sessions');

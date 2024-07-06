@@ -6,7 +6,8 @@
                     <h1 class="text-xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                         @include('components.activity-tag', ['activity' => $activity])
                     </h1>
-                    <p class="mt-4 text-base text-gray-500">{{ $activity->description }}</p>
+                    <p class="mt-4 text-base text-gray-500 mb-3">{{ $activity->description }}</p>
+                    @livewire('activity-awards-history-popup', ['activity' => $activity])
                 </div>
             </div>
             <div class="mx-auto max-w-7xl px-6 lg:px-8 mt-20 flex">
