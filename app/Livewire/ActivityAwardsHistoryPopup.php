@@ -32,7 +32,7 @@ class ActivityAwardsHistoryPopup extends Component
     {
         $currentSession = Session::whereRaw('CURRENT_TIMESTAMP BETWEEN start_at AND end_at')->first();
         $this->startDate = $currentSession?->start_at?->format('Y-m-d') ?? now()->format('Y-m-d');
-        $this->endDate = $currentSession?->end_at?->format('Y-m-d') ?? now()->format('Y-m-d');
+        $this->endDate = $currentSession?->end_at?->addDays(1)?->format('Y-m-d') ?? now()->format('Y-m-d');
         $this->isOpen = true;
     }
 
