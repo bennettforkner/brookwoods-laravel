@@ -16,12 +16,24 @@
             </div>
         </div>
         <div class="mx-auto max-w-2xl px-6 lg:px-8">
-				@php $sessions = $sessions->sortByDesc(fn($session) => Carbon::parse($session->start_at)); @endphp
+				@php
+					$sessions = $sessions->sortByDesc(fn($session) => Carbon::parse($session->start_at));
+				@endphp
 				@forelse($sessions as $session)
+				@php
+					$isCurrent = $session->start_at->isPast() && $session->end_at->isFuture();
+				@endphp
 				<a href="{{ route('sessions.show', ['session' => $session]) }}">
-					<div class="bg-white rounded-lg shadow-lg mx-auto mb-4">
-						<div class="p-6">
+					<div class="bg-white rounded-lg shadow-lg mx-auto mb-4"
+					@if ($isCurrent)
+						style='background-color: #aaddaa;'
+					@endif
+					>
+						<div class="p-6" style='position:relative;'>
 							<h2 class="text-xl font-semibold text-gray-900">{{ $session->name }}</h2>
+							@if($isCurrent)
+								<div style='position:absolute;top:10px;right:15px;'>* Current</div>
+							@endif
 							<p class="mt-4 text-base text-gray-500">{{ $session->description }}</p>
 							<p class="mt-4 text-base text-gray-500">{{ Carbon::parse($session->start_at)->format('m/d') }} - {{ Carbon::parse($session->end_at)->format('m/d') }}, {{ \Carbon\Carbon::parse($session->end_at)->format('Y') }}</p>
 						</div>
