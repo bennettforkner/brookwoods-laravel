@@ -21,7 +21,7 @@
 				@endphp
 				@forelse($sessions as $session)
 				@php
-					$isCurrent = $session->start_at->isPast() && $session->end_at->isFuture();
+					$isCurrent = $session->start_at->isPast() && $session->end_at->addDays(1)->isFuture();
 				@endphp
 				<a href="{{ route('sessions.show', ['session' => $session]) }}">
 					<div class="bg-white rounded-lg shadow-lg mx-auto mb-4"
