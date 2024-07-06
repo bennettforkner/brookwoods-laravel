@@ -21,7 +21,7 @@
 				@endphp
 				@forelse($sessions as $session)
 				@php
-					$isCurrent = $session->start_at->isPast() && $session->end_at->addDays(1)->isFuture();
+					$isCurrent = $session->isCurrent();
 				@endphp
 				<a href="{{ route('sessions.show', ['session' => $session]) }}">
 					<div class="bg-white rounded-lg shadow-lg mx-auto mb-4"
@@ -35,7 +35,7 @@
 								<div style='position:absolute;top:10px;right:15px;'>* Current</div>
 							@endif
 							<p class="mt-4 text-base text-gray-500">{{ $session->description }}</p>
-							<p class="mt-4 text-base text-gray-500">{{ Carbon::parse($session->start_at)->format('m/d') }} - {{ Carbon::parse($session->end_at)->format('m/d') }}, {{ \Carbon\Carbon::parse($session->end_at)->format('Y') }}</p>
+							<p class="mt-4 text-base text-gray-500">{{ $session->start_at->format('m/d') }} - {{ $session->end_at->format('m/d') }}, {{ $session->end_at->format('Y') }}</p>
 						</div>
 					</div>
 				</a>

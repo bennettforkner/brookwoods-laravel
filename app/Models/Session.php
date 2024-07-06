@@ -35,4 +35,15 @@ class Session extends Model
             ->where('date', '>=', $this->start_at)
             ->where('date', '<=', $this->end_at);
     }
+
+    public function isCurrent() {
+        return $this->start_at <= now() && $this->end_at >= now()->addDays(-1);
+    }
+
+    public static function current()
+    {
+        return static::where('start_at', '<=', now())
+            ->where('end_at', '>=', now()->addDays(-1))
+            ->first();
+    }
 }
