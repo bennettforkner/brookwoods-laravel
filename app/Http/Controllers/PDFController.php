@@ -30,6 +30,7 @@ class PDFController extends Controller
         $endDate = $request->end_date;
 
         $achievements = Achievement::whereRaw('date BETWEEN ? AND ?', [$startDate, $endDate])
+            ->orderBy('date')
             ->get();
 
         return view('pdf.activity-achievements-list', [
