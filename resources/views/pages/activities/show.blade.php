@@ -45,6 +45,7 @@
                                                     {{ $scoresheet->person->first_name }} {{ $scoresheet->person->last_name }}
                                                 </h3>
                                             </div>
+                                            &nbsp;
                                             <div class="lg:p-1 pl-2">
                                                 <p class="lg:text-lg text-xs text-base text-gray-500">
                                                     {{ $scoresheet?->highest_achievement?->award?->name ?? '' }}
