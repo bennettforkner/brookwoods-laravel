@@ -29,7 +29,7 @@ class PDFController extends Controller
         $startDate = $request->start_date;
         $endDate = $request->end_date;
 
-        $achievements = Achievement::whereRaw('created_at BETWEEN ? AND ?', [$startDate, $endDate])
+        $achievements = Achievement::whereRaw('date BETWEEN ? AND ?', [$startDate, $endDate])
             ->get();
 
         return view('pdf.activity-achievements-list', [
