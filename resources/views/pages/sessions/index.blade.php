@@ -41,8 +41,8 @@
 				</a>
 				@empty
 					<div class="p-6">
-						<h2 class="text-xl font-semibold text-gray-900">No Activities Found</h2>
-						<p class="mt-4 text-base text-gray-500">No activities found. Please check back later.</p>
+						<h2 class="text-xl font-semibold text-gray-900">No Sessions Found</h2>
+						<p class="mt-4 text-base text-gray-500">No sessions found. Please check back later.</p>
 					</div>
 				@endforelse
         </div>
