@@ -36,7 +36,7 @@
 					<td>{{ $scoresheet->person->first_name }}</td>
 					<td>{{ $scoresheet->person->last_name }}</td>
 					@php $highest_achievement = $scoresheet->highest_achievement; @endphp
-					<td>{{ $highest_achievement?->award ? ($highest_achievement?->award?->name . "(" . $highest_achievement?->award?->short_name . ")") : '' }}</td>
+					<td>{{ $highest_achievement?->award ? ($highest_achievement?->award?->name . " (" . $highest_achievement?->award?->short_name . ")") : '' }}</td>
 					<td>{{ $highest_achievement?->date ?? '' }}</td>
 				</tr>
 			@endforeach
