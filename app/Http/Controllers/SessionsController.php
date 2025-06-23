@@ -93,7 +93,19 @@ class SessionsController extends Controller
             'csv' => 'required|file',
         ]);
 
-        $csv = array_map('str_getcsv', file($request->file('csv')));
+        //$csv = array_map('str_getcsv', file($request->file('csv')));
+        $csv = [];
+        $csvRaw = file($request->file('csv'));
+        foreach ($csvRaw as $key => $line) {
+            foreach (preg_split("/[\r\n]/i",$line) as $newline) {
+                if (trim($newline) === '') {
+                    continue;
+                }
+                $csv[] = $newline;
+            }
+        }
+        array_splice($csv, 1, 1);
+        $csv = array_map('str_getcsv', $csv);
 
         $columns = array_shift($csv);
 
@@ -114,13 +126,19 @@ class SessionsController extends Controller
 
             if (!$personId) {
                 $person = Person::create([
-                    'first_name' => $row['FirstName'],
-                    'last_name' => $row['LastName'],
+                    'first_name' => trim($row['FirstName']),
+                    'last_name' => trim($row['LastName']),
                     'date_of_birth' => $row['DateOfBirth'] ?? null,
                     'external_id' => intval($row['SerialNumber']) ?? null
                 ]);
 
                 $personId = $person->id;
+            } else {
+                $person = Person::find($personId);
+                $person->first_name = trim($row['FirstName']);
+                $person->last_name = trim($row['LastName']);
+                $person->date_of_birth = $row['DateOfBirth'] ?? null;
+                $person->save();
             }
             $existingPersonSession = DB::table('people_sessions')->where('person_id', $personId)->where('session_id', $session->id)->first();
             if (!$existingPersonSession) {
